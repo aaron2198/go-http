@@ -65,6 +65,7 @@ func (e *Env) GetRoutes(router *mux.Router) {
 	router.HandleFunc("/hc", e.healthHandler).Methods("GET")
 	router.HandleFunc("/communities", e.community_route)
 	router.HandleFunc("/instancedb", e.instanceDb_route)
+	router.HandleFunc("/users", e.user_route)
 }
 
 func (e *Env) GetMiddleware(router *mux.Router) {
@@ -97,6 +98,18 @@ func (e *Env) community_route(w http.ResponseWriter, r *http.Request) {
 	h := &handler.Community{
 		CommunityInterface: repository,
 		Logger:             e.Logger,
+	}
+	h.Handle(r, w)
+}
+
+// userHandler CRUD users
+func (e *Env) user_route(w http.ResponseWriter, r *http.Request) {
+	repository := &repo.User{
+		Db: e.Db,
+	}
+	h := &handler.User{
+		UserInterface: repository,
+		Logger:        e.Logger,
 	}
 	h.Handle(r, w)
 }

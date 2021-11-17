@@ -39,6 +39,7 @@ func (e *Env) DBconnect() {
 func (e *Env) Migrate() {
 	err := e.Db.AutoMigrate(
 		&model.Community{},
+		&model.User{},
 	)
 	if err != nil {
 		e.Logger.Log.WithFields(logrus.Fields{

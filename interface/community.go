@@ -13,6 +13,6 @@ type Community interface {
 	FindBySubdomain(sub string) (*model.Community, error)
 	// FindByDbId returns all communities matching the provided Database ID
 	FindByDbId(id uint) (*model.Community, error)
-	// FuzzyFind returns a list of communities matching the provided search term as sunstring of Subdomain
+	// FuzzyFind returns a list of communities matching the provided search term as substring of Subdomain
 	FuzzyFind(sub string) ([]*model.Community, error)
 }
